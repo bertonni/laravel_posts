@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace MyBlog\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;	
-use App\Post;
-use App\Category;
+use MyBlog\Post;
+use MyBlog\Category;
 
 class CategoriesController extends Controller
 {

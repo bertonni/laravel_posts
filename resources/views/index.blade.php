@@ -1,30 +1,21 @@
 @extends('layouts.app')
 <style>
 .post-label {
-	/*margin: 3px;*/
-	/*background-color: #dcdcdc;*/
 	padding: 10px 5px;
 	color: #000;
 	transition: 0.7s;
 }
 .post-label:hover {
-	/*background-color: #efefef;*/
 	text-decoration: none;
 	transition: 0.7s;
 	-webkit-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transform: scale(1.1);
 }
-.post-label a {
-	/*color: #000;*/
-}
 .post-label a:hover {
 	text-decoration: none;
-	/*color: #000;*/
+
 	transition: 0.7s;
-}
-.posts {
-	/*background-color: #ededed;*/
 }
 </style>
 @section('content')
@@ -42,7 +33,7 @@
 			@foreach($posts as $post)
 				<div class="col-md-4 post-label">
 					<a href="{{ action('PostsController@viewPost', [$post->id]) }}"><b>{{ $post->title }}</b>
-					<p>{{ $post->description }}</p></a>
+					<p class="text-justify">{{ $post->description }}</p></a>
 				</div>
 			@endforeach
 		</div>

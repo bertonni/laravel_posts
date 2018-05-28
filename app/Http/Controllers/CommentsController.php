@@ -1,24 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace MyBlog\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;	
-use App\Post;
-use App\Category;
-use App\Comment;
+use MyBlog\Post;
+use MyBlog\Category;
+use MyBlog\Comment;
 
 class CommentsController extends Controller
 {
-	public function edit(Comment $comment, Post $post)
-	{
-		// $user = Auth::user();
-		// $post = Post::find($post->id);
-		// $comment = Comment::find($comment->id);
-		// $edit = true;
-		// return redirect(action('PostsController@viewPost', [ $comment->post_id]))->with('user', 'post', 'comment', 'edit');
-		// return view('view_post', compact('user', 'post', 'comment', 'edit'));
-	}
 
 	public function delete(Request $request, Comment $comment)
 	{

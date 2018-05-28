@@ -8,13 +8,15 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/summernote.css') }}" rel="stylesheet" />
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <link href="{{ asset('css/froala_editor.pkgd.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/froala_style.min.css') }}" rel="stylesheet" />
+    <!-- <title>{{ config('app.name', 'Laravel') }}</title> -->
+    <title>My Blog</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/summernote.min.js') }}" defer></script>
+    <script src="{{ asset('js/froala_editor.pkgd.min.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -28,7 +30,8 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <!-- {{ config('app.name', 'Laravel') }} -->
+                    My Blog
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace MyBlog\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;	
-use App\Post;
-use App\Category;
-use App\User;
+use MyBlog\Post;
+use MyBlog\Category;
+use MyBlog\User;
 
 class PostsController extends Controller
 {
@@ -49,12 +49,10 @@ class PostsController extends Controller
 		$post = Post::find($id);
 		
 		$comments = DB::table('comments')
-		->select('*')
 		->where('post_id', $id)
 		->get();
 
 		$users = DB::table('users')
-		->select('*')
 		->get();
 
 		return view('view_post', compact('post', 'comments', 'users'));

@@ -35,11 +35,24 @@
 		@if (!empty($comments))
 			@foreach($comments as $comment)
 				<div class="col-md-12 post-label">
-					<p class="comment">{{ $comment->description }}</p>
+					<div class="comment">
+						<div class="content">{!! $comment->description !!}</div>
+						<form action="{{ action('CommentsController@update', [$comment->id]) }}" method="POST" class="d-none form_edit">
+							<div class="form-group">
+								<textarea class="form-control fr-view comment_form_edit" name="description" rows="9" required>{!! $comment->description !!}</textarea>
+								<input type="hidden" name="postId" value="{{ $post->id }}">
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-success"><i class="fa fa-check"></i></button>
+								<button class="btn btn-danger cancel" title="Cancel"><i class="fa fa-times"></i></button>
+							</div>
+							{{ csrf_field() }}
+						</form>
+					</div>
 					@if (Auth::check() && $comment->user_id == Auth::id())
 						<div class="actions">
-							<a href="{{ action('CommentsController@edit', [$comment->id, $post->id]) }}" class="btn btn-info" title="Edit comment"><i class="fa fa-edit"></i></a>
-							<a href="{{ action('CommentsController@delete', [$comment->id]) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this comment? This action can\'t be undone.');" title="Delete comment"><i class="fa fa-trash"></i></a>
+							<button class="btn btn-info edit_comment" title="Edit comment"><i class="fa fa-edit"></i></button>
+							<a href="{{ action('CommentsController@delete', [$comment->id]) }}" class="btn btn-danger" id="delete_comment" onclick="return confirm('Are you sure you want to delete this comment? This action can\'t be undone.');" title="Delete comment"><i class="fa fa-trash"></i></a>
 						</div>
 					@endif
 					<div class="author">
@@ -52,7 +65,7 @@
 					</div>
 				</div>
 			@endforeach
-			@else
+		@else
 			<br>
 			<p>There is no comments about this topic. Be the first one to comment.</p>
 		@endif
@@ -61,7 +74,7 @@
 				<form method="POST" action="{{ action('CommentsController@create') }}">
 					<div class="form-group">
 						<label for="comment">Comment:</label><br>
-						<textarea class="form-control summernote" name="description" id="comment" rows="6" placeholder="Type your comment here" required></textarea>
+						<textarea class="form-control" name="description" id="comment" rows="9" required></textarea>
 						<input type="hidden" name="postId" value="{{ $post->id }}">
 					</div>
 					<div class="form-group">
@@ -76,7 +89,19 @@
 </div>
 <script>
   $(document).ready(function() {
-      $('.summernote').summernote({height: 150});
+  	$('textarea').froalaEditor();
+
+  	$('.edit_comment').click(function() {
+  		$(this).parent().siblings('.comment').children('.content').hide('1500');
+  		$(this).parent().siblings('.comment').children('.form_edit').removeClass('d-none');
+  		$(this).hide('1500');
+  		$(this).siblings('#delete_comment').hide('1500');
+  		$('.add_comment').hide('1500');
+  	});
+
+  	$('.cancel').click(function() {
+  		$(this).parentsUntil('.content').hide('1500');
+  	});
   });
 </script>
 @endsection

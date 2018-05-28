@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace MyBlog;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,11 +8,11 @@ class Comment extends Model
 {
     public function user()
     {
-    	return $this->belongsTo('App\User');
+    	return $this->belongsTo('MyBlog\User');
     }
 
     public function post()
     {
-    	return $this->belongsTo('App\Post');
+    	return $this->belongsTo('MyBlog\Post');
     }
 }

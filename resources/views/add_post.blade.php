@@ -31,7 +31,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="new_category">Dont't found the category?</label>
+					<label for="new_category">Don't found the category?</label>
 					<a href="/addCategory">Add Category</a>
 				</div>
 				@else
