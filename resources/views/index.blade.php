@@ -1,44 +1,26 @@
 @extends('layouts.app')
-<style>
-.post-label {
-	padding: 10px 5px;
-	color: #000;
-	transition: 0.7s;
-}
-.post-label:hover {
-	text-decoration: none;
-	transition: 0.7s;
-	-webkit-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  transform: scale(1.1);
-}
-.post-label a:hover {
-	text-decoration: none;
-
-	transition: 0.7s;
-}
-</style>
 @section('content')
 <div class="container">
-	<h1>Welcome to My Site</h1>
+	<h1>@lang('messages.welcome')</h1>
 	@if (Auth::check())
-		<a href="/posts">Create a Post</a><br/><br/>
+		<a href="{{ action('PostsController@add') }}">@lang('messages.create_post')</a><br/><br/>
 		@else
-		<h3>You must be logged to create a post.</h3>
-		<a href="/login">Login Here.</a>
+		<p>@lang('messages.must_be_logged')</p>
 	@endif
-	@if (!empty($posts))
-		<h3>Latest posts</h3>
-		<div class="row posts">				
+	@if (sizeof($posts) > 0)
+		<h3>@lang('messages.latest_posts')</h3>
+		<div class="row">				
 			@foreach($posts as $post)
-				<div class="col-md-4 post-label">
+				<div class="col-md-4 posts">
 					<a href="{{ action('PostsController@viewPost', [$post->id]) }}"><b>{{ $post->title }}</b>
-					<p class="text-justify">{{ $post->description }}</p></a>
+					<p class="text-justify">{{ $post->description }}</p>
+					<span>@lang('messages.created_at') {{ date('M d, Y', strtotime($post->created_at)) }}</span><br>
+				</a>
 				</div>
 			@endforeach
 		</div>
 		@else
-		<h3>There's no recent posts.</h3>
+		<h3>@lang('messages.no_recent_posts')</h3>
 	@endif
 </div>
 @endsection

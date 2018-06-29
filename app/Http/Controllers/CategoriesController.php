@@ -37,6 +37,6 @@ class CategoriesController extends Controller
 		$category = new Category();
 		$category->title = $request->title;
 		$category->save();
-		return redirect('/'); 
+		return redirect('/posts'); 
 	}
 }

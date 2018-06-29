@@ -26,6 +26,22 @@ class CommentsController extends Controller
 		return redirect(action('PostsController@viewPost', [$request->postId])); 
 	}
 
+	public function upvote(Comment $comment)
+	{
+		$comm = Comment::find($comment->id);
+		$comm->upvotes = $comment->upvotes + 1;
+		$comm->save();
+		return redirect(action('PostsController@viewPost', [$comm->post_id]));
+	}
+
+	public function downvote(Comment $comment)
+	{
+		$comm = Comment::find($comment->id);
+		$comm->downvotes = $comment->downvotes + 1;
+		$comm->save(); 
+		return redirect(action('PostsController@viewPost', [$comm->post_id]));
+	}
+
 	public function create(Request $request) {
 		$comment = new Comment();
 		$comment->description = $request->description;

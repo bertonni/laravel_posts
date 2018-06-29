@@ -4,7 +4,9 @@ namespace MyBlog\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App;
 use Auth;
+use Session;
 
 class HomeController extends Controller
 {
@@ -29,14 +31,29 @@ class HomeController extends Controller
 
         $posts = DB::table('posts')
         ->latest()
-        ->take(10)
+        ->take(12)
         ->get();
 
         $categories = DB::table('categories')
-        ->select('*')
         ->get();
 
-        return view('index',compact('user', 'posts', 'categories'));
+        $users = DB::table('users')
+        ->get();
+
+        return view('index',compact('user', 'posts', 'categories', 'users'));
     }
-    
+
+    /**
+     * Change session locale
+     * @param  Request $request
+     * @return Response
+     */
+    public function changeLocale(Request $request)
+    {
+        $this->validate($request, ['locale' => 'required|in:pt_br,en']);
+        Session::put('locale', $request->locale);
+        App::setLocale($request->locale);
+        
+        return redirect()->back();
+    }
 }

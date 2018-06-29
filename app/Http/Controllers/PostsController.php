@@ -23,7 +23,6 @@ class PostsController extends Controller
 		$user = Auth::user();
 
 		$categories = DB::table('categories')
-		->select('*')
 		->get();
 
 		return view('add_post', compact('user', 'categories'));
@@ -47,7 +46,7 @@ class PostsController extends Controller
 	{
 		$id = $postId;
 		$post = Post::find($id);
-		
+
 		$comments = DB::table('comments')
 		->where('post_id', $id)
 		->get();
@@ -55,6 +54,8 @@ class PostsController extends Controller
 		$users = DB::table('users')
 		->get();
 
-		return view('view_post', compact('post', 'comments', 'users'));
+		$count_comments = sizeof($comments);
+
+		return view('view_post', compact('post', 'comments', 'users', 'count_comments'));
 	}
 }
